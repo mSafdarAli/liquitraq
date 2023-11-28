@@ -1,0 +1,36 @@
+.btn-c-icon {
+	cursor: pointer;
+}
+.pager_button{
+	background-color: #353b6f;
+	border-radius: 10px;
+	padding-left:25px;
+	padding-right:25px;
+	padding-top:15px;
+	padding-bottom:15px;
+	font-size: 17px;
+	line-height: 24px;
+}
+i{
+	font-size: 24px ;
+	font-weight: 900;
+	vertical-align: baseline;
+}
+.border{
+	background-color: transparent !important;
+	border: 1px solid #fff;
+}
+.active{
+	background-color: #32C5DE !important;
+	color :white;
+}
+@media screen and (max-width: 860px) {
+	.pager_button{
+		background-color: #353b6f;
+		border-radius: 10px;
+		padding:10px;
+		font-size: 14px;
+		line-height: 17px;
+	}
+	
+}

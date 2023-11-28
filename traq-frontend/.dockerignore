@@ -1,0 +1,5 @@
+# Ignore files with .git extension
+.git
+
+# Ignore node_modules directory
+node_modules

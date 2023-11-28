@@ -1,0 +1,266 @@
+<div class="px-2">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+            <div class="form-group">
+              <mat-label>Asset Name</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="assetName" type="text" placeholder="Enter Asset Name" />
+              </mat-form-field>
+              <vmessage field="assetName" [control]="form.controls['assetName']">
+              </vmessage>
+            </div>
+            <div class="form-group">
+              <mat-label>Serial No</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="serial" type="text" placeholder="Enter Serial No" />
+              </mat-form-field>
+              <vmessage field="serial" [control]="form.controls['serial']">
+              </vmessage>
+              <!-- <div class="row">
+                <div class="col-md-3">
+                  <div class="position-relative">
+                    <i (click)="removeSerial()" *ngIf="serialImage"
+                      class="bi bi-x-circle-fill position-absolute top-0 end-0 text-danger fs-3"></i>
+                    <img [src]="serialImage" onError="this.src='/assets/images/defaultThumbnail.png'" class="w-100"
+                      alt="" />
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <button class="btn warning_gradient text-light mt-md-3" matRipple type="button"
+                  (click)="serial.click()">Upload Serial Image</button>
+                <input #serial type="file" hidden (change)="selectSerialImage($event)" />
+                </div>
+              </div> -->
+            </div>
+            <div class="form-group">
+              <mat-label>Picture Serial No</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="pictureSerial" type="text" placeholder="Enter Picture Serial No" />
+              </mat-form-field>
+              <vmessage field="pictureSerial" [control]="form.controls['pictureSerial']">
+              </vmessage>
+            </div>
+            <div>
+              <mat-label>Type</mat-label>
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                [fControl]="form.controls['type']" [options]="selectType" placeholder="Select Asset Type">
+              </lb-auto-complete>
+            </div>
+            <div>
+              <mat-label>Job No</mat-label>
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                [fControl]="form.controls['job']" [options]="selectJobNo" placeholder="Select Job No.">
+              </lb-auto-complete>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="row">
+              <div class="col-12 mb-2 p-0 position-relative">
+                <i *ngIf="picturesFirst" (click)="removeFile(picturesFirst, true)"
+                  class="bi bi-x-circle-fill position-absolute top-0 end-0 m-1  text-danger fs-2"></i>
+                <img [src]="picturesFirst" onError="this.src='/assets/images/defaultImage.png'" class="w-100" alt="" />
+              </div>
+
+              <div class="d-md-flex justify-content-between p-0">
+                <ng-container *ngIf="pictures.length > 0; else default">
+                  <div class="col-lg-3 col-12 col-md-3 pe-md-1 p-0" *ngFor="let item of pictures">
+                    <div class="custom_image position-relative">
+                      <i (click)="removeFile(item)"
+                        class="bi bi-x-circle-fill position-absolute top-0 end-0 text-danger fs-3"></i>
+                      <img [src]="[item]" onError="this.src='/assets/images/defaultThumbnail.png'" alt="" />
+                    </div>
+
+                  </div>
+                  <ng-container *ngIf="pictures.length < 4">
+                    <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of getExtraElement()">
+                      <div class="custom_image">
+                        <img src="/assets/images/defaultThumbnail.png" alt="" />
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <ng-template #default>
+                  <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of [1, 2, 3, 4]">
+                    <div class="custom_image">
+                      <img [src]="[item]" onError="this.src='/assets/images/defaultThumbnail.png'" alt="" />
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group">
+            <mat-label>Asset Description</mat-label>
+            <mat-form-field class="w-100">
+              <textarea matInput formControlName="description" type="text" placeholder="Enter Description"></textarea>
+            </mat-form-field>
+            <mat-error>
+              <vmessage field="description" [control]="form.controls['description']">
+              </vmessage>
+            </mat-error>
+          </div>
+          <div class="form-group">
+            <mat-label>Asset Notes</mat-label>
+            <mat-form-field class="w-100">
+              <textarea matInput formControlName="notes" type="text" placeholder="Enter Asset Notes"></textarea>
+            </mat-form-field>
+            <mat-error>
+              <vmessage field="notes" [control]="form.controls['notes']">
+              </vmessage>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Quantity</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="quantity" type="number" placeholder="Enter Asset Quantity" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="quantity" [control]="form.controls['quantity']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Price</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="price" type="number" placeholder="Enter Asset Price" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="price" [control]="form.controls['price']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Weight</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="weight_each" type="number" placeholder="Enter Asset Weight" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="weight_each" [control]="form.controls['weight_each']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Make</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="make" type="text" placeholder="Enter Asset Make" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="make" [control]="form.controls['make']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Model</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="model" type="text" placeholder="Enter Asset Model" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="model" [control]="form.controls['model']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <mat-label>Status</mat-label>
+            <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+              [fControl]="form.controls['status']" [options]="selectStatus" placeholder="Select Asset Status">
+            </lb-auto-complete>
+          </div>
+          <div class="col-md-3 col-12">
+            <div *ngIf="form.value.status == 'completed'">
+              <mat-label>Disposition</mat-label>
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                [required]="form.value.status == 'completed'" [fControl]="form.controls['disposition']"
+                [options]="selectDisposition" placeholder="Enter Deposition Status">
+              </lb-auto-complete>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div *ngIf="form.value.disposition">
+              <mat-label>Date</mat-label>
+              <app-date-picker [fControl]="form.controls['date']" placeholder="Enter Date">
+              </app-date-picker>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="form-group" *ngIf="form.value.disposition">
+              <mat-label>Who</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="who" type="text" placeholder="Enter Name" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="who" [control]="form.controls['who']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="form-group" *ngIf="
+                form.value.disposition && form.value.disposition == 'resold'
+              ">
+              <mat-label>Shipping Info</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="shippingInfo" type="text" [required]="
+                    form.value.disposition && form.value.disposition == 'resold'
+                  " placeholder="Enter Shipping Info" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="shippingInfo" [control]="form.controls['shippingInfo']">
+                </vmessage>
+              </mat-error>
+            </div>
+            <div class="form-group" *ngIf="
+                form.value.disposition && form.value.disposition != 'resold'
+              ">
+              <mat-label>Ticket Info</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="ticketInfo" type="text" [required]="
+                    form.value.disposition && form.value.disposition != 'resold'
+                  " placeholder="Enter Ticket Info" />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="ticketInfo" [control]="form.controls['ticketInfo']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-12">
+        <div class="float-md-end">
+          <button (click)="uploadFile.click()" type="button" mat-ripple
+            class="btn btn-custom-upload  d-inline-block m-1">
+            Upload Images
+          </button>
+          <input #uploadFile type="file" hidden (change)="selectTemplate($event)" multiple="" />
+          <button mat-ripple class="btn btn-custom">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-loading></app-loading>

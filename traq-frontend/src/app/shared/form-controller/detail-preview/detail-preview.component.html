@@ -1,0 +1,399 @@
+<div class="px-2">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+            <div class="form-group">
+              <mat-label>Asset Name</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="assetName"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <vmessage
+                field="assetName"
+                [control]="form.controls['assetName']"
+              >
+              </vmessage>
+            </div>
+            <div class="form-group">
+              <mat-label>Serial No</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="serial"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="serial" [control]="form.controls['serial']">
+                </vmessage>
+              </mat-error>
+            </div>
+
+            <div>
+              <mat-label>Type</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="type"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <!-- <lb-auto-complete
+                appearance="outline"
+                [multiple]="false"
+                [clear]="false"
+                [fControl]="form.controls['type']"
+                [options]="selectType"
+              >
+              </lb-auto-complete> -->
+            </div>
+            <div>
+              <mat-label>Job No</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="job"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <!-- <lb-auto-complete
+                appearance="outline"
+                [multiple]="false"
+                [clear]="false"
+                [fControl]="form.controls['job']"
+                [options]="selectJobNo"
+              >
+              </lb-auto-complete> -->
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="row">
+              <div class="col-12 mb-2 p-0">
+                <img
+                  [src]="picturesFirst"
+                  onError="this.src='/assets/images/defaultImage.png'"
+                  class="w-100"
+                  alt=""
+                />
+              </div>
+              <!-- <i
+                *ngIf="picturesFirst"
+                (click)="removeFile(picturesFirst, true)"
+                class="bi bi-trash d-block text-center text-danger"
+              ></i> -->
+              <div class="d-flex justify-content-between p-0">
+                <ng-container *ngIf="pictures.length > 0; else default">
+                  <div
+                    class="col-lg-3 col-12 col-md-3 pe-1"
+                    *ngFor="let item of pictures"
+                  >
+                    <div class="custom_image">
+                      <img
+                        [src]="[item]"
+                        onError="this.src='/assets/images/defaultThumbnail.png'"
+                        alt=""
+                      />
+                    </div>
+                    <!-- <i
+                      (click)="removeFile(item)"
+                      class="bi bi-trash d-block text-center text-danger"
+                    ></i> -->
+                  </div>
+                  <ng-container *ngIf="pictures.length < 4">
+                    <div
+                      class="col-lg-3 col-12 col-md-3 pe-1"
+                      *ngFor="let item of getExtraElement()"
+                    >
+                      <div class="custom_image">
+                        <img src="/assets/images/defaultThumbnail.png" alt="" />
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <ng-template #default>
+                  <div
+                    class="col-lg-3 col-12 col-md-3 pe-1"
+                    *ngFor="let item of [1, 2, 3, 4]"
+                  >
+                    <div class="custom_image">
+                      <img
+                        [src]="[item]"
+                        onError="this.src='/assets/images/defaultThumbnail.png'"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group">
+            <mat-label>Asset Description</mat-label>
+            <mat-form-field class="w-100">
+              <textarea
+                matInput
+                formControlName="description"
+                type="text"
+                [readonly]="true"
+              ></textarea>
+            </mat-form-field>
+            <mat-error>
+              <vmessage
+                field="description"
+                [control]="form.controls['description']"
+              >
+              </vmessage>
+            </mat-error>
+          </div>
+          <div></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Quantity</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="quantity"
+                  type="number"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage
+                  field="quantity"
+                  [control]="form.controls['quantity']"
+                >
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Price</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="price"
+                  type="number"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="price" [control]="form.controls['price']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Weight</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="weight_each"
+                  type="number"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage
+                  field="weight_each"
+                  [control]="form.controls['weight_each']"
+                >
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Make</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="make"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="make" [control]="form.controls['make']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <div class="form-group">
+              <mat-label>Model</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="model"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="model" [control]="form.controls['model']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-3 col-12">
+            <mat-label>Status</mat-label>
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="status"
+                type="text"
+                [readonly]="true"
+              />
+            </mat-form-field>
+            <!-- <lb-auto-complete
+              appearance="outline"
+              [multiple]="false"
+              [clear]="false"
+              [fControl]="form.controls['status']"
+              [options]="selectStatus"
+            >
+            </lb-auto-complete> -->
+          </div>
+          <div class="col-md-3 col-12">
+            <div *ngIf="form.value.status == 'completed'">
+              <mat-label>Disposition</mat-label>
+              <mat-form-field>
+                <input
+                  matInput
+                  formControlName="disposition"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <!-- <lb-auto-complete
+                appearance="outline"
+                [multiple]="false"
+                [clear]="false"
+                [required]="form.value.status == 'completed'"
+                [fControl]="form.controls['disposition']"
+                [options]="selectDisposition"
+              >
+              </lb-auto-complete> -->
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div *ngIf="form.value.disposition">
+              <mat-label>Date</mat-label>
+              <app-date-picker
+                [disabled]="true"
+                [fControl]="form.controls['date']"
+              >
+              </app-date-picker>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="form-group" *ngIf="form.value.disposition">
+              <mat-label>Who</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="who"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="who" [control]="form.controls['who']">
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div
+              class="form-group"
+              *ngIf="
+                form.value.disposition && form.value.disposition == 'resold'
+              "
+            >
+              <mat-label>Shipping Info</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="shippingInfo"
+                  type="text"
+                  [readonly]="true"
+                  [required]="
+                    form.value.disposition && form.value.disposition == 'resold'
+                  "
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage
+                  field="shippingInfo"
+                  [control]="form.controls['shippingInfo']"
+                >
+                </vmessage>
+              </mat-error>
+            </div>
+            <div
+              class="form-group"
+              *ngIf="
+                form.value.disposition && form.value.disposition != 'resold'
+              "
+            >
+              <mat-label>Ticket Info</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="ticketInfo"
+                  [readonly]="true"
+                  type="text"
+                  [required]="
+                    form.value.disposition && form.value.disposition != 'resold'
+                  "
+                />
+              </mat-form-field>
+              <mat-error>
+                <vmessage
+                  field="ticketInfo"
+                  [control]="form.controls['ticketInfo']"
+                >
+                </vmessage>
+              </mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- <div class="col-12">
+          <div class="float-end">
+            <button (click)="uploadFile.click()" type="button" mat-ripple
+              class="btn btn-custom-upload d-sm-inline-block d-block m-1">
+              Upload Images
+            </button>
+            <input #uploadFile type="file" hidden (change)="selectTemplate($event)" multiple="" />
+            <button mat-ripple class="btn btn-custom ">Save</button>
+          </div>
+  
+        </div> -->
+    </div>
+  </form>
+</div>
+
+<app-loading></app-loading>

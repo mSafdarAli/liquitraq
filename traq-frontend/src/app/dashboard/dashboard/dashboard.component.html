@@ -1,0 +1,162 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-6">
+      <div class="card ">
+        <div class="wave1">
+          <div class="card-body custom_padding_131">
+            <h4 class="custom_sky font-17 fw-bold">QUICK OVERVIEW</h4>
+            <div class="row">
+              <div class="col-md-6 col-lg-4" *ngFor="let item of statusData">
+                <div>
+                  <p class="font-17 text-light ">{{status[item.state]}}</p>
+                  <h4 class="font-30">{{ item.count }}</h4>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-md-6">
+      <div class="card">
+        <div class="wave2">
+          <div class="card-body custom_padding_131">
+            <h4 class="custom_sky font-17 fw-bold">JOBS</h4>
+            <div class="row">
+              <div class="col-md-6 col-lg-4" *ngFor="let item of jobData">
+                <div>
+                  <p class="font-17 text-light">{{jobStatus[item.status]}}</p>
+                  <h4 class="font-30">{{ item.count }}</h4>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12  col-lg-4 col-md-12" *ngFor="let item of dispositionData">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="custom_sky font-17 fw-bold">{{ item?.category }}</h4>
+          <div class="row">
+            <div class="col-lg-8 col-12 order-lg-1 order-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <h6 class="font-17">Resold</h6>
+                    <h4 class="font-30">{{ item?.disposition?.resold }}</h4>
+                  </div>
+                </div>
+                <div class="col">
+                  <div>
+                    <h6 class="font-17">Recycled</h6>
+                    <h4 class="font-30">{{ item?.disposition?.recycled }}</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <h6 class="font-17">Disposed</h6>
+                    <h4 class="font-30">{{ item?.disposition?.disposed }}</h4>
+                  </div>
+                </div>
+                <div class="col">
+                  <div>
+                    <h6 class="font-17 text-align-center">
+                      Return To Customer
+                    </h6>
+                    <h4 class="font-30">{{ item?.disposition?.returnToCustomer }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12 d-flex justify-content-center order-lg-2 order-1">
+              <div *ngIf="item.category == 'Furniture'">
+                <img src="/assets/images/graph1.png" class="w-100 h-auto mb-md-0 mb-4  " />
+              </div>
+              <div *ngIf="item.category == 'IT'">
+                <img src="/assets/images/graph2.png" class="w-100 h-auto mb-md-0 mb-4  " />
+              </div>
+              <div *ngIf="item.category == 'Infrastructure'">
+                <img src="/assets/images/graph3.png" class="w-100 h-auto mb-md-0 mb-4  " />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="ps.havePerm(['dashboard','priceGraph'])">
+    <div class="row card-body">
+      <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-12" *ngFor="let item of priceData">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-start">
+            <div>
+              <h4 class="custom_sky font-17 fw-bold">{{ item.category }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-lg-6 col-12 d-flex align-items-center ">
+            <app-pie-chart [data]="item?.disposition" [dataCategory]="item?.category"></app-pie-chart>
+          </div>
+          <div class="col-lg-5 col-12 d-flex align-items-center">
+            <div class="row">
+              <div class="col-lg-12 col-6">
+                <h6 class="font-17">Resold</h6>
+                <h4 class="font-30">$ {{ item?.disposition?.resold }}</h4>
+              </div>
+              <div class="col-lg-12 col-6">
+                <h6 class="font-17">Recycled</h6>
+                <h4 class="font-30">$ {{ item?.disposition?.recycled }}</h4>
+              </div>
+              <div class="col-lg-12 col-6">
+                <h6 class="font-17">Disposed</h6>
+                <h4 class="font-30">$ {{ item?.disposition?.disposed }}</h4>
+              </div>
+              <div class="col-lg-12 col-6">
+                <h6 class="font-17">Return To Customer</h6>
+                <h4 class="font-30">$ {{ item?.disposition?.returnToCustomer }}</h4>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class=" vl col-1 d-none d-lg-inline-block" *ngIf="item.category !== 'Infrastructure'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="ps.havePerm(['dashboard','userGraph'])">
+    <!-- <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <h4 class="custom_sky font-17 fw-bold">USERS QUICK OVERVIEW</h4>
+          </div>
+          <app-line-chart></app-line-chart>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <h4 class="custom_sky font-17 fw-bold">ITEMS VIEWS</h4>
+          </div>
+          <ng-container *ngIf="chartItem.length>0">
+            <app-line-chart [data]="chartItem"></app-line-chart>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading></app-loading>

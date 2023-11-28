@@ -1,0 +1,136 @@
+
+<div class="p-2 mt-2 ">
+    <form [formGroup]="form">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <mat-label>Job Name</mat-label>
+                <mat-form-field class="w-100">
+                  <input matInput  [readonly]="true" formControlName="job_name" type="text" required />
+                </mat-form-field>
+                <mat-error>
+                  <vmessage field="job_name" [control]="form.controls['job_name']">
+                  </vmessage>
+                </mat-error>
+                <mat-label>Job No#</mat-label>
+                <mat-form-field class="w-100">
+                  <input
+                    matInput
+                    formControlName="job_no"
+                    type="text"
+                    [readonly]="true"
+                  />
+                </mat-form-field>
+                <mat-label>Client</mat-label>
+                <mat-form-field class="w-100">
+                  <input matInput  [readonly]="true" formControlName="client" type="text" />
+                </mat-form-field>
+                <mat-error>
+                  <vmessage field="client" [control]="form.controls['client']">
+                  </vmessage>
+                </mat-error>
+                <mat-label>Status</mat-label>
+                <mat-form-field class="w-100">
+                  <input matInput  [readonly]="true" formControlName="status" type="text" />
+                </mat-form-field>
+                <!-- <lb-auto-complete
+                  appearance="outline"
+                  [multiple]="false"
+                  [clear]="false"
+                  [fControl]="form.controls['status']"
+                  [options]="selectStatus"
+                >
+                </lb-auto-complete> -->
+              </div>
+              <div class="col-12 col-md-6 col-lg-6 ">
+                <div class="row">
+                  <div class="col-12  mb-2 p-0">
+                    <img [src]="picturesFirst" onError="this.src='/assets/images/defaultImage.png'" class="w-100" alt="">
+                  </div>
+                 
+                  <div class="d-flex justify-content-between p-0">
+                    <ng-container *ngIf="pictures.length>0 else default ">
+                      <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of pictures">
+                        <div class="custom_image">
+                          <img [src]="[item]" onError="this.src='/assets/images/defaultThumbnail.png'" alt="">
+                        </div>
+                       
+                      </div>
+                      <ng-container *ngIf="pictures.length<4">
+                        <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of getExtraElement()">
+                          <div class="custom_image">
+                            <img src="/assets/images/defaultThumbnail.png" alt="">
+                          </div>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                    <ng-template #default>
+                      <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of [1,2,3,4]">
+                        <div class="custom_image">
+                          <img [src]="[item]" onError="this.src='/assets/images/defaultThumbnail.png'" alt="">
+                        </div>
+                      </div>
+                    </ng-template>
+              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <mat-label>Address</mat-label>
+            <mat-form-field class="w-100">
+              <input matInput  [readonly]="true" formControlName="address" type="text" />
+            </mat-form-field>
+            <mat-error>
+              <vmessage field="address" [control]="form.controls['address']">
+              </vmessage>
+            </mat-error>
+          </div>
+    
+          <div class="row">
+            <div class="col-6">
+              <mat-label>Start Date</mat-label>
+              <app-date-picker   [disabled]="true" [fControl]="form.controls['start_date']">
+              </app-date-picker>
+            </div>
+            <div class="col-6">
+              <mat-label>Start Date</mat-label>
+              <app-date-picker   [disabled]="true" [fControl]="form.controls['end_date']">
+              </app-date-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="float-end">
+            <button
+              (click)="uploadFile.click()"
+              type="button"
+              class="btn btn-custom-upload d-sm-inline-block d-block m-1"
+            >
+              Upload Images
+            </button>
+            <input
+              #uploadFile
+              type="file"
+              hidden
+              (change)="selectTemplate($event)"
+              multiple=""
+            />
+    
+            <button class="btn btn-custom">Save</button>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </div>
+  
+  

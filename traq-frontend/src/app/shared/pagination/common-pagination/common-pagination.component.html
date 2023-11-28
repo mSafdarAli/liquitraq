@@ -1,0 +1,28 @@
+<pagination-template #p="paginationApi" *ngIf="pager" class="row" (pageChange)="changePage($event)">
+	<div class="col-12">
+		<div class="row mt-2">
+			<div class="col-12 text-center d-flex align-items-center justify-content-md-end">
+				<!-- <a class="btn-c-icon text-light float-right mr-2 ml-4" [class.disabled]="p.isFirstPage()"
+					(click)="changePage(1)">
+					<i class="mdi mdi-chevron-double-left"></i>
+				</a> -->
+				<a class="btn-c-icon text-light float-right mx-1" [class.disabled]="pager.start == pager.page"
+					(click)="changePage(pager.page,-1)">
+					<i class="mdi mdi-chevron-left"></i>
+				</a>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" (click)="changePage(pager.page=0,1);type='1'" [class.active]="pager.page=='1'">1</span>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" (click)="changePage(pager.page=0,2);type='2'" [class.active]="pager.page=='2'" *ngIf="pager && 2 <= lastPage()">2</span>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" (click)="changePage(pager.page=0,3);type='3'" [class.active]="pager.page=='3'" *ngIf="pager && 3 <=lastPage()">3</span>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" (click)="changePage(pager.page=0,4);type='4'" [class.active]="pager.page=='4'" *ngIf="pager && 4 <= lastPage()">4</span>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" (click)="changePage(pager.page=0,5);type='5'" [class.active]="pager.page=='5'" *ngIf="pager && 5 <= lastPage()">5</span>
+				<span  class="btn-c-icon text-light float-right mx-1 pager_button border" *ngIf="pager && pager.end != pager.page && pager.page > 5" [class.active]="pager.page>'5'" >{{pager.page}}</span><span *ngIf="(pager.page!=lastPage() && pager.page>5) || ((lastPage()!=5 && lastPage()>1 && pager.page!=lastPage())) ">...</span>
+				<a class="btn-c-icon text-light float-right mx-1" [class.disabled]="pager.end == pager.page"
+					(click)="changePage(pager.page,1)">
+					<i class="mdi mdi-chevron-right"></i>
+				</a>
+				<span *ngIf="pager" class="btn-c-icon text-light float-right mx-md-1  pager_button">{{lastPage()}}</span>
+			</div>
+		</div>
+	</div>
+
+</pagination-template>

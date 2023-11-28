@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-8 col-6 align-items-center">
+        <h4 class="font-22 text-dark">{{(userId)? 'Update' : 'Add' }} User</h4>
+    </div>
+    <div class="col-md-4 col-6 text-right align-items-top">
+        <button mat-ripple (click)="close()" class="btn button text-white btn-xs float-end" type="button"><i
+                class="mdi mdi-close"></i></button>
+    </div>
+</div>
+<hr class="my-1">
+<form [formGroup]="form" class="my-2" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12 my-2">
+            <div class="form-group">
+                <mat-form-field class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Name" type="text">
+                    <mat-error>
+                        <vmessage field="name" [control]="form.controls['name']">
+                        </vmessage>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group mt-1">
+                <mat-form-field class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="Email" type="email">
+                    <mat-error>
+                        <vmessage field="email" [control]="form.controls['email']">
+                        </vmessage>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <lb-auto-complete placeholder="Roles" [multiple]="false" [clear]="true"
+                    [fControl]="form.controls['roleId']" [options]="roleOptions">
+                </lb-auto-complete>
+            </div>
+            <div class="form-group" *ngIf="!userId">
+                <mat-form-field class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" placeholder="Password" [type]="passwordHide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error>
+                        <vmessage field="password" [control]="form.controls['password']">
+                        </vmessage>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group" *ngIf="!userId">
+                <mat-form-field class="w-100">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="confirmPassword" placeholder="Confirm Password" [type]="confirmHide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="confirmHide = !confirmHide">{{confirmHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error>
+                        <vmessage field="confirmPassword" [control]="form.controls['confirmPassword']">
+                        </vmessage>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-check mt-1">
+                <input class="form-check-input" type="checkbox" formControlName="active">
+                <label class="form-check-label">
+                    Active
+                </label>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn button text-white float-end">
+                {{(userId)? "Update" : "Save"}}
+            </button>
+        </div>
+    </div>
+</form>

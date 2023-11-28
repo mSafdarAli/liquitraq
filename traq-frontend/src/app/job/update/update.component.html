@@ -1,0 +1,150 @@
+
+<div class="px-2">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <mat-label>Job Name</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="job_name" type="text" required  placeholder="Enter Job Name"/>
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="job_name" [control]="form.controls['job_name']">
+                </vmessage>
+              </mat-error>
+              <mat-label>Job No#</mat-label>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  formControlName="job_no"
+                  type="text"
+                  [readonly]="true"
+                />
+              </mat-form-field>
+              <mat-label>Client</mat-label>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="client" type="text" placeholder="Enter Client"/>
+              </mat-form-field>
+              <mat-error>
+                <vmessage field="client" [control]="form.controls['client']">
+                </vmessage>
+              </mat-error>
+              <mat-label>Status</mat-label>
+              <lb-auto-complete
+                appearance="outline"
+                [multiple]="false"
+                [clear]="false"
+                [fControl]="form.controls['status']"
+                [options]="selectStatus"
+                placeholder="Select Job Status"
+              >
+              </lb-auto-complete>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 ">
+              <div class="row">
+                <div class="col-12 mb-2 p-0 position-relative">
+                  <i
+                    *ngIf="picturesFirst"
+                    (click)="removeFile(picturesFirst, true)"
+                    class="bi bi-x-circle-fill position-absolute top-0 end-0 m-1  text-danger fs-2"
+                  ></i>
+                  <img
+                    [src]="picturesFirst"
+                    onError="this.src='/assets/images/defaultImage.png'"
+                    class="w-100"
+                    alt=""
+                  />
+                </div>
+                
+                <div class="d-md-flex justify-content-between p-0">
+                  <ng-container *ngIf="pictures.length>0 else default ">
+                    <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of pictures">
+                      <div class="custom_image position-relative">
+                        <i
+                        (click)="removeFile(item)"
+                        class="bi bi-x-circle-fill position-absolute top-0 end-0 text-danger fs-3"
+                      ></i>
+                        <img
+                          [src]="[item]"
+                          onError="this.src='/assets/images/defaultThumbnail.png'"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <ng-container *ngIf="pictures.length<4">
+                      <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of getExtraElement()">
+                        <div class="custom_image">
+                          <img src="/assets/images/defaultThumbnail.png" alt="">
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #default>
+                    <div class="col-lg-3 col-12 col-md-3 pe-1" *ngFor="let item of [1,2,3,4]">
+                      <div class="custom_image">
+                        <img [src]="[item]" onError="this.src='/assets/images/defaultThumbnail.png'" alt="">
+                      </div>
+                    </div>
+                  </ng-template>
+            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <mat-label>Address</mat-label>
+          <mat-form-field class="w-100">
+            <input matInput formControlName="address" type="text" placeholder="Enter Address" />
+          </mat-form-field>
+          <mat-error>
+            <vmessage field="address" [control]="form.controls['address']">
+            </vmessage>
+          </mat-error>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-6">
+            <mat-label>Start Date</mat-label>
+            <app-date-picker [fControl]="form.controls['start_date']" placeholder="Enter From Date">
+            </app-date-picker>
+          </div>
+          <div class="col-md-6">
+            <mat-label>End Date</mat-label>
+            <app-date-picker [fControl]="form.controls['end_date']" placeholder="Enter To Date">
+            </app-date-picker>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="float-end">
+          <button
+            (click)="uploadFile.click()"
+            type="button"
+            class="btn btn-custom-upload d-block-inline-block m-1"
+          >
+            Upload Images
+          </button>
+          <input
+            #uploadFile
+            type="file"
+            hidden
+            (change)="selectTemplate($event)"
+            multiple=""
+          />
+  
+          <button class="btn btn-custom">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

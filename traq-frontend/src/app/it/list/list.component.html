@@ -1,0 +1,154 @@
+<div class="row">
+  <div class="col-12">
+    <div class=" bg-transparent">
+      <div class="card-body px-2">
+        <div class="responsive-table-plugin">
+          <div class="table-rep-plugin">
+            <div class="table-responsive" data-pattern="priority-columns">
+              <table class="table custom_table mb-0">
+                <thead>
+                  <tr>
+                    <th>Serial #</th>
+                    <th>Picture Serial #</th>
+                    <th>Job #</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Disposition</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data">
+                    <td>{{item.serial}}</td>
+                    <td>{{item.pictureSerial}}</td>
+                    <td>{{ item?.job }}</td>
+                    <td>{{ item?.assetName }}</td>
+                    <td>{{ item?.type | titlecase }}</td>
+                    <td>{{ status[item?.status] }}</td>
+                    <td>{{ depoStatus[item?.disposition.data.type] }}</td>
+                    <td class="custom_width">
+                      <button *ngIf="ps.havePerm(['products','create'])"
+                        class="btn btn-warning btn-xs ms-md-0 ms-lg-1 custom_button warning_gradient"
+                        routerLink="edit/{{ item._id }}" [queryParams]="params">
+                        <i class="fas fa-pen"> </i>Edit
+                      </button>
+                      <button *ngIf="ps.havePerm(['products','create'])" (click)="deleteIt(item._id)"
+                        class="btn btn-danger btn-xs  ms-1  custom_button danger_gradient">
+                        <i class="fe-trash-2"></i>Delete
+                      </button>
+                      <button *ngIf="ps.havePerm(['products','viewButton'])"
+                        class="btn btn-warning btn-xs ms-md-0 ms-lg-1 custom_button warning_gradient"
+                        routerLink="preview/{{ item._id }}">
+                        <i class="fe-eye"> </i> View
+                      </button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row custom_row m-0">
+          <div class="col-md-4 col-8 ps-md-4">
+            <button *ngIf="ps.havePerm(['products','create'])"
+              class="btn btn-bg btn-xs ms-md-0 ms-lg-1 tertiary_gradient custom_button" routerLink="new">
+              <i class="fe-plus"> </i> Add New Assets
+            </button>
+          </div>
+          <div class="col-md-2 col-4">
+            <h4 class="fw-bold">Total : {{totalRecords}}</h4>
+          </div>
+          <div class="col-md-6 col-12">
+            <pagination-control [pager]="pager" [params]="params"></pagination-control>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card m-2" *ngIf="ps.havePerm(['dashboard','priceGraph'])">
+      <div class="row card-body">
+        <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+          <div class="row">
+            <div class="col-12 ">
+              <div>
+                <h4 class="custom_color font-17 fw-bold">STATUS</h4>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-12 ">
+              <ng-container *ngIf="checkObjectLength(statusGraph)">
+                <app-pie-chart [data]="statusGraph"></app-pie-chart>
+              </ng-container>
+            </div>
+            <div class="col-lg-5 col-12 ">
+              <div class="row">
+                <div class="col-lg-12 col-6" *ngFor="let item of dispositionCounts">
+                  <h6 class="font-17">{{(item.type=='returnToCustomer')?'Return To Customer':item.type | titlecase}}
+                  </h6>
+                  <h4 class="font-30">{{ item.count }}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="vl col-1 d-none d-lg-block"></div>
+          </div>
+        </div>
+        <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+          <div class="row">
+            <div class="col-12 ">
+              <div>
+                <h4 class="custom_color font-17 fw-bold">OVERVIEW</h4>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-12 ">
+              <ng-container *ngIf="checkObjectLength(overViewGraph)">
+                <app-pie-chart [data]="overViewGraph"></app-pie-chart>
+              </ng-container>
+            </div>
+            <div class="col-lg-5 col-12 ">
+              <div class="row">
+                <div class="col-lg-12 col-6" *ngFor="let item of statusCounts">
+                  <h6 class="font-17">{{(item.status=='originalState')?'Original State' : item.status | titlecase }}
+                  </h6>
+                  <h4 class="font-30">{{ item.count }}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="vl col-1 d-none d-lg-block"></div>
+          </div>
+        </div>
+        <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+          <div class="row">
+            <div class="col-12 ">
+              <div>
+                <h4 class="custom_color font-17 fw-bold">PRICE IN $</h4>
+              </div>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-lg-6 col-12 ">
+              <ng-container *ngIf="checkObjectLength(priceGraph)">
+                <app-pie-chart [data]="priceGraph"></app-pie-chart>
+              </ng-container>
+            </div>
+            <div class="col-lg-5 col-12 ">
+              <div class="row">
+                <div class="col-lg-12 col-6" *ngFor="let item of dispositionCounts">
+                  <h6 class="font-17">{{(item.type=='returnToCustomer')?'Return To Customer':item.type | titlecase}}
+                  </h6>
+                  <h4 class="font-30">${{ item.totalPrice }}</h4>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-1 d-none d-lg-block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading></app-loading>

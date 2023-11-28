@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traq-backend-deploy
+  labels:
+      name: traq-backend-deploy
+      app: traq-front-demo-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: traq-backend
+      app: traq-front-demo-pod
+  template:
+    metadata:
+      labels:
+        name: traq-backend
+        app: traq-front-demo-pod
+    spec:
+      containers:
+      - name: traq-backend
+        image: traqb
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000

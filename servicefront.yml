@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traq-service
+spec:
+  selector:
+    name: traq-frontend
+    app: traq-front-demo-pod
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000
+      nodePort: 30005

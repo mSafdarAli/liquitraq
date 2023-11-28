@@ -1,0 +1,328 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/scss/base/index.scss";
+// @import "./node_modules/bootstrap/scss/bootstrap.scss";
+@import "assets/scss/config/default/bootstrap.scss";
+@import "assets/scss/config/default/app.scss";
+@import "assets/scss/icons.scss";
+@import "~ngx-toastr/toastr";
+// @import "assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+// @import "assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css";
+// @import "assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+// @import "assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css";
+
+a {
+    text-decoration: none;
+}
+html,
+body {
+    height: 100%;
+    background-color: #0A0C25 !important;
+    font-family: 'HKGrotesk', sans-serif;
+}
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.cdk-global-scrollblock {
+    body {
+        overflow-x: unset;
+    }
+}
+mat-form-field {
+    width: 100%;
+    font-family: 'HKGrotesk' !important;
+    font-size: 17px !important;
+    line-height: 24px !important;
+}
+.mat-form-field-infix{
+    padding: 0.25rem 0.9rem 0.6rem 0.9rem !important;
+}
+hr {
+    border-bottom: 1px solid #000 !important;
+}
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+.custom_bg{
+    background-color: #0d6efd !important ;
+}
+.custom_table{
+    thead {
+        background-image: linear-gradient(119deg, #0da8cb 42%, #32c6e0 58%, #32c6e0 58%);
+        color: white;
+        border:0px !important;
+        th:first-child{
+            border-top-left-radius: 10px !important; 
+        border-bottom-left-radius: 10px !important;
+        padding-left: 50px;
+        }
+        th:last-child{
+            border-top-right-radius: 10px !important; 
+        border-bottom-right-radius: 10px !important;
+        }
+           tr{
+           border-color: #1B1E51 !important;
+           th{
+            padding-top:25px !important;
+            padding-bottom:25px !important;
+            font-size: 17px;
+            line-height: 24px;
+            
+           }
+        }
+    }
+    tbody{
+        tr{
+           border-color: #3A407E !important;
+           td{
+            padding-top: 15px !important;
+            font-size: 17px;
+            line-height: 24px;
+            font-weight: bold;
+            vertical-align: baseline !important;
+            
+           }
+           td:first-child{
+            padding-left: 50px;
+           }
+        }
+        
+        background: linear-gradient(to top, #151440, #1e245a) !important;
+        color: white;
+        tr:first-child{
+            td:first-child{
+                border-top-left-radius: 10px !important; 
+            
+            }
+            td:last-child{
+                border-top-right-radius: 10px !important; 
+               
+            }
+        }
+        tr:last-child{
+            // td{
+            //     border: none !important;
+            // }
+            // td:first-child{
+            //     border-bottom-left-radius: 10px !important;
+            // }
+            // td:last-child{
+
+            //     border-bottom-right-radius: 10px !important;
+            // }
+        }
+    }
+    
+}
+.custom_row{
+    background: linear-gradient(to top, #151440, #1e245a) !important;
+    color: white;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    align-items: baseline;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100% !important;
+}
+ .mat-form-field-outline {
+    background-color: #353B6F ;
+    border-color: #353B6F !important;
+    border-radius: 10px !important;
+}
+
+
+.text {
+    color: rgb(139 134 63) !important;
+}
+input,mat-label{
+    color: white !important;
+}
+::placeholder{
+    color: #676db3 !important;
+}
+.mat-select-placeholder{
+     color: #676db3 !important;
+}
+
+
+mat-label{
+    font-size: 17px;
+    font-weight: bold;
+}
+.bg-transparent{
+    margin-top: auto;
+}
+
+@media screen and (max-width: 450px) {
+    .bg-transparent{
+        margin-top: 60px !important;
+    }
+}
+
+@media screen and (max-width: 820px)  {
+    .cdk-overlay-pane {
+        bottom: 100px !important;
+    }
+    .custom_width{
+        min-width:200px !important ;
+    }
+    .custom_button{
+        padding-top: 10px;
+        padding-bottom: 9px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 10px !important;
+        color:#fefefe ;
+    }
+    .card .card-body{
+        padding-left: 15px !important;
+        padding-top: 32px !important;
+        padding-right: 15px !important ;
+    }
+    .custom_image {
+        width: 100%;
+        height: auto !important;
+        margin-bottom: 10px !important;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .custom_table{
+        thead{
+            tr{
+            th:first-child{
+                padding-top: 20px !important;
+                padding-left: 20px !important;
+            }  
+            }
+        }
+        tbody{
+            tr{
+            td:first-child{
+                padding-left: 20px !important;
+            }
+        }
+        }
+    }
+}
+
+.custom_image {
+    width: 100%;
+    height: 100px;
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.top-card {
+    background-image: url("/assets/images/Artboard 3.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+}
+.btn-custom-upload{
+    background: linear-gradient(119deg, #c4943a 1%, #ffc65c 98%, #ffc65c 99%);
+    color: #ffffff !important;
+    border-radius: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+}
+
+.btn-custom-upload:hover{
+    background-color: #F8C058 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.btn-custom{
+    background: linear-gradient(119deg, #c24c6b -9%, #fd7296 108%, #fd7296 109%);
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+}
+
+.btn-custom:hover{
+    background-color: #CD5373 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.mat-select-value {
+    color: #fff;
+}
+
+.custom_sky{
+    color:#32C6E0 !important;
+}
+.custom_padding_131{
+    padding-bottom: 131px !important;
+}
+.card .card-body{
+    padding-left: 50px ;
+    padding-right: 50px ;
+    padding-top: 32px ;
+
+}
+.custom_button{
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 10px !important;
+    color:#fefefe ;
+}
+.custom_button:hover{
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+}
+.warning_gradient{
+    background-image: linear-gradient(119deg, #c4943a -7%, #ffc65c 106%, #ffc65c 107%);
+}
+.danger_gradient{
+    background-image: linear-gradient(119deg, #c24c6b -5%, #fd7296 104%, #fd7296 105%);
+}
+.tertiary_gradient{
+    background-image: linear-gradient(119deg, #665dbe 14%, #867bea 85%, #867bea 86%);
+}
+.card{
+    background: linear-gradient(to top, #151440, #1e245a) !important;
+    border-radius: 10px;
+}
+
+.table > :not(:first-child) {
+    border-top: 0 !important;
+}
+.list-image{
+    max-width: 80px;
+    width: 80px;
+    height: 80px;
+  }
+
+// .mat-form-field-wrapper{
+//     padding-bottom: 0px !important;
+// }

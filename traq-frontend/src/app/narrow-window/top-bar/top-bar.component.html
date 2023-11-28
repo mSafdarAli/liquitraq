@@ -1,0 +1,162 @@
+<!-- Topbar Start -->
+<div class="">
+  <div class="navbar-custom">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 col-7 order-md-1 order-1">
+        <div class="d-lg-none">
+          <div class="row">
+            <div class="col-10">
+              <div class="logo-box mt-2">
+                <img src="/assets/images/logo.png" alt="user-img" class="custom-logo" style="height: 60%;">
+              </div>
+            </div>
+            <div class="col-2">
+              <button class="button-menu-mobile waves-effect waves-light text-light" (click)="showMenu()">
+                <i class="fe-menu"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <form class="d-lg-block d-none" [formGroup]="searchForm" (ngSubmit)="searchByName(searchForm.value)">
+          <mat-form-field appearance="outline" class="search mt-1">
+            <input matInput formControlName="q" placeholder="Search" class="search">
+            <mat-icon matPrefix class="avatar">search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="col-md-6 col-lg-6 order-md-2 order-3 d-lg-block d-none">
+        <form [formGroup]="searchForm" *ngIf="['dashboard','user'].indexOf(this.url) == -1">
+          <ng-container *ngIf="['furniture','infra','it'].indexOf(this.url) > -1;else job">
+          <div class="row mt-1">
+            <div class="col-md-4">
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false" (selectionChange)="getFilteredData({type:searchForm.value.type, status: '', 'disposition.data.type': ''})"
+                [fControl]="searchForm.controls['type']" [options]="selectType" placeholder="Select Asset Type">
+              </lb-auto-complete>
+            </div>
+            <div class="col-md-4">
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false" (selectionChange)="getFilteredData({status:searchForm.value.status, 'disposition.data.type': ''})"
+                [fControl]="searchForm.controls['status']" [options]="selectStatus" placeholder="Select Asset Status">
+              </lb-auto-complete>
+            </div>
+            <div class="col-md-4" *ngIf="searchForm.value.status=='completed'">
+              <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false" (selectionChange)="getFilteredData({'disposition.data.type':searchForm.value['disposition.data.type']})"
+                [fControl]="searchForm.controls['disposition.data.type']" [options]="selectDisposition"
+                placeholder="Select Disposition Status">
+              </lb-auto-complete>
+            </div>
+
+          </div>
+        </ng-container>
+        <ng-template #job>
+          <div class="row mt-1">
+              <div class="col-md-4">
+                <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false" (selectionChange)="getFilteredData({status:searchForm.value.jobStatus})"
+                  [fControl]="searchForm.controls['jobStatus']" [options]="selectJobStatus"
+                  placeholder="Select Job Status">
+                </lb-auto-complete>
+            </div>
+          </div>
+        </ng-template>
+        </form>
+        
+      </div>
+      <div class="col-md-6 order-md-2 order-3 d-lg-none d-block">
+        <div class="float-end" *ngIf="['dashboard','user'].indexOf(this.url) == -1">
+        <button class="btn danger_gradient me-1 text-light" (click)="clearFilters()" *ngIf="isObjectEmpty(queryParams)">Clear Filter</button>
+        <button class="btn  me-2 warning_gradient text-light mt-md-2" type="button" *ngIf="menu" (click)="filters=!filters">
+          <i class="fa fa-filter"></i> Filters
+        </button>
+      </div>
+      </div>
+      <div *ngIf="filters">
+        <div class="side">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="custom_color font-24 fw-bold text-light">Filters</h4>
+                </div>
+                <div class="col-6">
+                  <button class=" btn btn-danger btn-xs float-end" (click)="filters = false"> <i
+                      class="bi bi-x text-white font-16"></i></button>
+                </div>
+              </div>
+              <form [formGroup]="searchForm" *ngIf="['dashboard','user'].indexOf(this.url) == -1">
+                <ng-container *ngIf="['furniture','infra','it'].indexOf(this.url) > -1;else job">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                        (selectionChange)="getFilteredData({type:searchForm.value.type, status: '', 'disposition.data.type': ''})"
+                        [fControl]="searchForm.controls['type']" [options]="selectType" placeholder="Select Asset Type">
+                      </lb-auto-complete>
+                    </div>
+                    <div class="col-md-6">
+                      <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                        (selectionChange)="getFilteredData({status:searchForm.value.status, 'disposition.data.type': ''})"
+                        [fControl]="searchForm.controls['status']" [options]="selectStatus"
+                        placeholder="Select Asset Status">
+                      </lb-auto-complete>
+                    </div>
+                    <div class="col-md-6" *ngIf="searchForm.value.status=='completed'">
+                      <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                        (selectionChange)="getFilteredData({'disposition.data.type':searchForm.value['disposition.data.type']})"
+                        [fControl]="searchForm.controls['disposition.data.type']" [options]="selectDisposition"
+                        placeholder="Select Disposition Status">
+                      </lb-auto-complete>
+                    </div>
+                  </div>
+                </ng-container>
+              </form>
+              <ng-template #job>
+                <div class="row mt-1">
+                  <div class="col-md-4">
+                    <lb-auto-complete appearance="outline" [multiple]="false" [clear]="false"
+                      (selectionChange)="getFilteredData({status:searchForm.value.jobStatus})"
+                      [fControl]="searchForm.controls['jobStatus']" [options]="selectJobStatus"
+                      placeholder="Select Job Status">
+                    </lb-auto-complete>
+                  </div>
+                </div>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 d-none d-lg-block order-3 mt-2 pt-1">
+        <button class="btn danger_gradient text-light" (click)="clearFilters()" *ngIf="isObjectEmpty(queryParams)">Clear</button>
+      </div>
+      <div class="col-md-2 col-lg-2 col-5 order-md-4 order-2">
+        <div class="user-box text-end p-2 pt-0 pb-0">
+          <div>
+            <div class="d-flex float-end align-items-center">
+              <h4 class="text-light me-2 mb-0 font-17 fw-bold">{{userName}}</h4>
+              <div>
+                <img [src]="profileImage.image" onError="this.src='/assets/images/user.png'"
+                  class="rounded-circle avatar-sm" (click)="topmenu = !topmenu" />
+              </div>
+            </div>
+            <div class="dropdown ms-2">
+              <a href="javascript: void(0);" class="text-light dropdown-toggle title h5 mt-2 mb-1 d-block"
+                data-bs-toggle="dropdown">
+              </a>
+              <div class="dropdown-menu user-pro-dropdown" [class.show]="topmenu">
+             
+                <a (click)="logout()" class="dropdown-item notify-item">
+                  <i class="fe-log-out me-1"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- <p class="text-light">{{ userName }}</p> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!-- end Topbar -->

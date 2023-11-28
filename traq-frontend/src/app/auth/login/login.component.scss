@@ -1,0 +1,36 @@
+.margin {
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+.bg-pattern {
+  background: #1B1E51;
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(220,220,238,1) 0%,
+  //   rgba(220,220,238,1)15%,
+  //   rgba(0, 212, 255, 1) 100%
+  // );
+
+  box-shadow: rgba(2, 0, 36, 1) 0px 30px 60px -12px inset,
+  rgba(9, 9, 121, 0.4458158263305322) 0px 18px 36px -18px inset;
+}
+.image {
+  background: url('/assets/images/loginbackground.jpg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+.button{
+  background-color: #29BEDB;
+  color: #fff;
+}
+.button,.button:hover{
+  background-color: #29BEDB;
+  color: #fff;
+  border-radius: 10px;
+}

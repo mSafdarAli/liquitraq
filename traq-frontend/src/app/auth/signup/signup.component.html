@@ -1,0 +1,133 @@
+<div class="image"></div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-6 margin">
+      <div class="card bg-pattern">
+        <div class="p-2">
+          <!-- <h3 class="text-center mb-2 fw-bold text-white mt-2">Sign Up</h3> -->
+          <div class="text-center w-100 my-3">
+            <img src="/assets/images/logo.png" alt="" width="200px">
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="px-2 signup">
+            <div>
+              <mat-label>User Name</mat-label>
+              <mat-form-field>
+                <input matInput formControlName="name" required type="text" placeholder="Enter Username" />
+              </mat-form-field>
+              <vmessage field="name" [control]="loginForm.controls['name']"></vmessage>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-xxl-6 col-xl-6 col-lg-6">
+                <div>
+                  <mat-label>Password</mat-label>
+                  <mat-form-field class="w-100">
+                    <input matInput formControlName="password" [type]="passwordHide ? 'password' : 'text'"
+                      placeholder="Enter Password" />
+                    <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{
+                      passwordHide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+
+                  </mat-form-field>
+                  <mat-error>
+                    <vmessage field="password" [control]="loginForm.controls['password']">
+                    </vmessage>
+                  </mat-error>
+                </div>
+              </div>
+              <div class="col-12 col-xxl-6 col-xl-6 col-lg-6">
+                <div>
+                  <mat-label>Confirm Password</mat-label>
+                  <mat-form-field class="w-100">
+                    <input matInput formControlName="confirmPassword" [type]="confirmHide ? 'password' : 'text'"
+                      placeholder="Please Confirm Password" />
+                    <mat-icon matSuffix (click)="confirmHide = !confirmHide">{{
+                      confirmHide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+
+                  </mat-form-field>
+                  <mat-error>
+                    <vmessage field="confirmPassword" [control]="loginForm.controls['confirmPassword']">
+                    </vmessage>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-xxl-6 col-xl-6 col-lg-6">
+                <div>
+                  <mat-label>Company Name</mat-label>
+                  <mat-form-field>
+                    <input matInput formControlName="company_name" required type="text"
+                      placeholder="Enter Company Name" />
+                  </mat-form-field>
+                  <vmessage field="company_name" [control]="loginForm.controls['company_name']"></vmessage>
+                </div>
+              </div>
+              <div class="col-12 col-xxl-6 col-xl-6 col-lg-6">
+                <div>
+                  <mat-label>Contact Email</mat-label>
+                  <mat-form-field>
+                    <input matInput formControlName="email" required type="email" placeholder="Enter Email Address" />
+                  </mat-form-field>
+                  <vmessage field="email" [control]="loginForm.controls['email']"></vmessage>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div>
+                  <mat-label>Contact Telephone</mat-label>
+                  <mat-form-field>
+                    <input matInput formControlName="contact" required type="text" [pattern]="'/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/'" placeholder="Enter Contact Number" />
+                  </mat-form-field>
+                  <vmessage field="contact" [control]="loginForm.controls['contact']"></vmessage>
+                </div>
+                <div>
+                  <mat-label>Corporate Address</mat-label>
+                  <mat-form-field>
+                    <input matInput formControlName="corporate_address" required type="text"
+                      placeholder="Enter Corporate Address" />
+                  </mat-form-field>
+                  <vmessage field="corporate_address" [control]="loginForm.controls['corporate_address']"></vmessage>
+                </div>
+                <div>
+                  <mat-label>Location Address</mat-label>
+                  <mat-form-field>
+                    <input matInput formControlName="location_address" required type="text"
+                      placeholder="Enter Location Address" />
+                  </mat-form-field>
+                  <vmessage field="location_address" [control]="loginForm.controls['location_address']"></vmessage>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <button class="btn button btn-block w-50" matRipple type="submit">
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="text-center">
+            <div class="row mt-3">
+              <div class="col-12 text-center">
+                <p class="text-white fw-bold">
+                  Click here
+                  <a routerLink="/login" class=""><b>Log In</b></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loading></app-loading>

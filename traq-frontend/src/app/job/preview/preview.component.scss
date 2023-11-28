@@ -1,0 +1,17 @@
+.custom_image {
+    width: 100%;
+    height: 100px;
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.card{
+    background-color: #1A1C4E ;
+    border-radius: 10px;
+}
+mat-label{
+    color: #fff;
+}

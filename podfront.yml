@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traq-frontend
+  labels:
+   name: traq-frontend
+   app: traq-front-demo-pod
+spec:
+  containers:
+  - name: traq-frontend
+    image: traqf
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 80

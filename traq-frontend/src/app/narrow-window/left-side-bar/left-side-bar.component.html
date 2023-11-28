@@ -1,0 +1,31 @@
+<div class="left-side-menu bg-sidemenu leftbar overflow-auto nav-background shadow-none">
+  <div class="h-100" data-simplebar>
+    <div class="text-center d-none d-lg-block">
+      <img src="/assets/logo/logo.png" alt="Liqui Tarq" class="img-fluid " />
+    </div>
+
+    <div id="sidebar-menu" class="bg-list">
+      <ul id="side-menu" (click)="removeClass()" class="">
+        <li>
+          <a routerLink="dashboard"><img src="/assets/images/home.png" class="ms-4 me-2" />Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="furniture"><img src="/assets/images/furniture.png" class="ms-4 me-2" />Furniture</a>
+        </li>
+        <li>
+          <a routerLink="it"><img src="/assets/images/IT.png" class="ms-4 me-2" />IT</a>
+        </li>
+        <li>
+          <a routerLink="infra"><img src="/assets/images/infra.png" class="ms-4 me-2" />Infrastructure Assets</a>
+        </li>
+        <li>
+          <a routerLink="job"><img src="/assets/images/jobs.png" class="ms-4 me-2" />Jobs</a>
+        </li>
+        <li *ngIf="ps.havePerm(['user management','view'])">
+          <a routerLink="user"><img src="/assets/images/userManagement.png" class="ms-4 me-2" />User Management</a>
+        </li>
+      </ul>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

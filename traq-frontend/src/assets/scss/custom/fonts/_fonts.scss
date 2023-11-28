@@ -1,0 +1,45 @@
+//
+// Google font - Nunito
+//
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700,900');
+
+
+//
+// Premium font - Cerebri Sans
+//
+
+@font-face {
+    font-family: "HKGrotesk";
+    font-style: normal;
+    src: url("/assets/fonts/HKGrotesk-Light.woff2") format("woff2");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    font-style: normal;
+    src: url("/assets/fonts/HKGrotesk-Regular.woff2") format("woff2");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    font-style: normal;
+    src: url("/assets/fonts/HKGrotesk-Medium.woff2") format("woff2");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    font-style: normal;
+    src: url("/assets/fonts/HKGrotesk-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    font-style: normal;
+    src: url("/assets/fonts/HKGrotesk-Bold.woff2") format("woff2");
+    font-weight: 700;
+}
